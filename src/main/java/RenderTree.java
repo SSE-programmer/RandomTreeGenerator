@@ -171,9 +171,7 @@ public class RenderTree {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                frame.remove(panel);
-
-                panel = new JPanel();
+                panel.removeAll();
 
                 generate(frame, Integer.parseInt(valueField.getText()),
                         Integer.parseInt(countField.getText()),
