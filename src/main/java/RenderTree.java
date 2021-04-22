@@ -9,7 +9,7 @@ import java.awt.event.*;
 
 public class RenderTree {
 
-    private static double cameraSpeed = 4.0;
+    private static double cameraSpeed = 1.0;
 
     private static GenerationType type = GenerationType.DEGREE;
 
@@ -108,6 +108,16 @@ public class RenderTree {
                         double z = view_panel.getCamera().getViewCenter().z;
 
                         view_panel.getCamera().setViewCenter(x, y, z);
+                    }
+                    case (KeyEvent.VK_MINUS) -> {
+                        double new_view_percent = view_panel.getCamera().getViewPercent() + 0.05;
+                        view_panel.getCamera().setViewPercent(new_view_percent);
+                    }
+                    case (KeyEvent.VK_EQUALS) -> {
+                        double current_view_percent = view_panel.getCamera().getViewPercent();
+                        if(current_view_percent > 0.05){
+                            view_panel.getCamera().setViewPercent(current_view_percent - 0.05);
+                        }
                     }
                 }
             }

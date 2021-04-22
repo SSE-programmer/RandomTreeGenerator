@@ -7,6 +7,7 @@ public class Node {
     public int number;
 
     private int level = 1;
+    public int count = 0;
 
     public ArrayList<ArrayList<Node>> nodeAtLevels = new ArrayList<ArrayList<Node>>();
 
@@ -21,6 +22,7 @@ public class Node {
                                 && generator.numberOfVertices < generator.maxNumberOfVertices; j++) {
                             if (Math.random() < generator.PROBABILITY) {
                                 levelNodeList.get(i).children.add(new Node(levelNodeList.get(i), generator));
+                                root.count++;
 
                                 if (root.nodeAtLevels.size() < root.level + 1) {
                                     root.nodeAtLevels.add(new ArrayList<Node>());
@@ -43,6 +45,7 @@ public class Node {
                         for (int j = 0; j < 5; j++) {
                             if (Math.random() < generator.PROBABILITY) {
                                 levelNodeList.get(i).children.add(new Node(levelNodeList.get(i), generator));
+                                root.count++;
 
                                 if (root.nodeAtLevels.size() < root.level + 1) {
                                     root.nodeAtLevels.add(new ArrayList<Node>());

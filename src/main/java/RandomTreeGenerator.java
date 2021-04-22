@@ -29,16 +29,43 @@ public class RandomTreeGenerator {
             maxNumberOfVertices = MAX_NUMBER_OF_VERTICES;
     }
 
+    private void prohodTree(Node node, int [][] array) {
+        for (int i = 0; i < node.children.size(); i++) {
+            array[node.number - 1][node.children.get(i).number - 1] = 1;
+
+            prohodTree(node.children.get(i), array);
+        }
+    }
+
+    public void printTree(Node node) {
+        int [][] treeArray = new int [node.count][node.count];
+
+        prohodTree(node, treeArray);
+
+        for (int i = 0; i < node.count; i++) {
+            System.out.println();
+            for (int j = 0; j < node.count; j++) {
+                System.out.print(treeArray[i][j] + " ");
+            }
+        }
+    }
+
     public Node generationWithDegree(int degree) {
         Node root = new Node(null, this);
 
         ArrayList<Node> lvl1 = new ArrayList<>();
+
+        root.count++;
 
         lvl1.add(root);
 
         root.nodeAtLevels.add(lvl1);
 
         root.nextGeneration(GenerationType.DEGREE, this, degree, root);
+
+        System.out.println();
+        System.out.println("Сгенерированно дерево: ");
+        printTree(root);
 
         return root;
     }
@@ -48,11 +75,16 @@ public class RandomTreeGenerator {
 
         ArrayList<Node> lvl1 = new ArrayList<>();
 
+        root.count++;
+
         lvl1.add(root);
 
         root.nodeAtLevels.add(lvl1);
 
         root.nextGeneration(GenerationType.DEPTH, this, depth, root);
+
+        System.out.println("Сгенерированно дерево: ");
+        printTree(root);
 
         return root;
     }
